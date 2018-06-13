@@ -1,0 +1,12 @@
+{
+  "name": "deepTracker",
+  "version": "0.0.1",
+  "description": "How deep will you go ?",
+  "scripts": {
+    "dev": "webextension-toolbox dev",
+    "build": "webextension-toolbox build"
+  },
+  "devDependencies": {
+    "webextension-toolbox": "latest"
+  }
+}
