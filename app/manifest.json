@@ -11,7 +11,10 @@
   },
   "background": {
     "scripts": [
-      "scripts/background.js"
+      "scripts/lodash.js",
+      "scripts/messenger.js",
+      "scripts/background.js",
+      "scripts/dashboard.js"
     ]
   },
   "browser_action": {
@@ -33,27 +36,21 @@
         "http://*/*",
         "https://*/*"
       ],
-      "css": [
-        "styles/contentscript.css"
-      ],
       "js": [
         "scripts/contentscript.js"
       ],
       "run_at": "document_end",
-      "all_frames": false
+      "all_frames": true
     }
   ],
   "permissions": [
     "activeTab",
-    "bookmarks",
     "browsingData",
     "history",
     "notifications",
-    "sessions",
     "storage",
     "tabs",
     "topSites",
-    "webNavigation",
     "webRequest",
     "<all_urls>"
   ]

@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Space+Mono");
+*{
+  box-sizing: border-box;
+}
+html,body{
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
+body{
+  font: "Space Mono", times, serif;
+  background: #1d1f20;
+}
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 100vh;
+}
+#screen{
+  border: 50px #cecece solid;
+  border-radius: 5px;
+  background: #111;
+  width: 60%;
+  height: 90%;
+  padding: 0.5rem;
+}
+#data{
+
+}
+code{
+  color: #efefef;
+  font-size: 2rem;
+}
