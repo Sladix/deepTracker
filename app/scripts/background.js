@@ -4,26 +4,38 @@ class DataSource{
     this.load(payload);
   }
 
+  getDefaults = function(){
+    return {
+      fame : 0,
+      achievments : [],
+      events : [],
+      tabOpened : 0,
+      tabClosed : 0,
+      keypressed : {},
+      keypressedTotal : 0,
+      onTabDetached: 0,
+      click : 0,
+      copy : 0,
+      paste : 0
+    }
+  }
+
   load(payload){
     if(payload && payload.hasOwnProperty('fame')){
       _.assignIn(this.data, _.clone(payload));
     }else if(!payload){
-      this.data={
-        fame : 0,
-        achievments : [],
-        events : [],
-        opened : 0,
-        closed : 0,
-        keypressed : {},
-        keypressedTotal : 0,
-        click : 0,
-        copy : 0,
-        paste : 0
-      }
+      this.data = this.getDefaults();
     }
   }
 
   getData(){
+    return this.data;
+  }
+
+  whipe(){
+    this.data = this.getDefaults();
+    browser.storage.sync.clear();
+    browser.storage.sync.set(this.data);
     return this.data;
   }
   // op: string - add, sub, ass
@@ -38,21 +50,9 @@ class DataSource{
       default:
         this.data[prop] = value;
     }
-    browser.storage.sync.set(this.data).then(r => console.log(r));
+    browser.storage.sync.set(this.data);
   }
 }
-
-class Tracker{
-  constructor(ds){
-    this.ds = ds;
-  }
-
-  click(){
-    this.ds.alter('click', 'add', 1);
-    console.log(this.ds.getData());
-  }
-}
-
 
 let ds = new DataSource();
 // Load data from the sync storage
@@ -60,10 +60,10 @@ browser.storage.sync.get().then(source => {
   ds.load(source);
   console.log(ds.getData());
 });
-// instanciate tracker
-let tracker = new Tracker(ds);
+
+dataSource = ds;
 
 Messenger.addListener({
-  click: tracker.click.bind(tracker),
-  getData: ds.getData.bind(ds)
+  getData: ds.getData.bind(ds),
+  whipe: ds.whipe.bind(ds)
 });

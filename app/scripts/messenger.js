@@ -8,6 +8,15 @@ function onTabRemoved(callback){
   browser.tabs.onRemoved.addListener(callback);
 }
 
+function onTabOpened(callback){
+  browser.tabs.onCreated.addListener(callback);
+  // TODO check numbers of conccurent tabs
+}
+
+function onTabDetached(callback){
+  browser.tabs.onDetached.addListener(callback);
+}
+
 function sendMessage(port, msg, payload){
   port.postMessage({action: msg.action, payload});
 }
@@ -31,5 +40,7 @@ browser.runtime.onConnect.addListener(function(port){
 Messenger = {
   addListener,
   onTabRemoved,
+  onTabOpened,
+  onTabDetached,
   sendMessage
 }
